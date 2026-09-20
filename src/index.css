@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #F7F5F2;
+    --surface: #EFECE7;
+    --surface-subtle: #FAF9F6;
+    --text-primary: #171717;
+    --text-secondary: #77736F;
+    --text-muted: #9E9A95;
+    --accent: #B49A7A;
+    --accent-hover: #9E8465;
+    --accent-light: #F4EFEA;
+    --border: rgba(23, 23, 23, 0.08);
+    --border-strong: rgba(23, 23, 23, 0.16);
+    --radius: 12px;
+    --radius-lg: 18px;
+    --radius-full: 9999px;
+    --shadow-subtle: 0 4px 20px -4px rgba(23, 23, 23, 0.04);
+    --shadow-elevated: 0 16px 40px -12px rgba(23, 23, 23, 0.08);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--background);
+    color: var(--text-primary);
+  }
+
+  /* Font styling based on text direction */
+  html[dir="rtl"] body {
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0px;
+    line-height: 1.7;
+  }
+
+  html[dir="ltr"] body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+  }
+
+  .font-editorial {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-arabic-heading {
+    font-family: 'Alexandria', 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  /* Custom scrollbar for an editorial feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F7F5F2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D8D3CC;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #B49A7A;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
