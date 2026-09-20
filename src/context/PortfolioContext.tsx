@@ -71,12 +71,28 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (saved) {
         const parsed = JSON.parse(saved);
         // Shallow/deep merge with default to guarantee no missing fields
-        return {
+        const loaded = {
           ...defaultSiteConfig,
           ...parsed,
           bio: { ...defaultSiteConfig.bio, ...(parsed.bio || {}) },
           socials: { ...defaultSiteConfig.socials, ...(parsed.socials || {}) },
+          hiddenPlatforms: parsed.hiddenPlatforms || [],
+          customPlatforms: parsed.customPlatforms || [],
         };
+        // If saved config has the old deleted placeholder availability status or location, clear it
+        if (
+          loaded.availabilityStatus?.ar?.includes('متاحة للمشاريع المختارة') ||
+          loaded.availabilityStatus?.en?.includes('Available for select commissions')
+        ) {
+          loaded.availabilityStatus = { ar: '', en: '' };
+        }
+        if (
+          loaded.location?.ar?.includes('دبي / الرياض') ||
+          loaded.location?.en?.includes('Dubai / Riyadh')
+        ) {
+          loaded.location = { ar: '', en: '' };
+        }
+        return loaded;
       }
     } catch (e) {
       console.error('Failed to parse saved site configuration', e);

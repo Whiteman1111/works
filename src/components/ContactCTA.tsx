@@ -37,10 +37,12 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({ language }) => {
 
         <div className="relative z-10 max-w-3xl space-y-6 sm:space-y-8">
           {/* Subtle Tag */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F5F2]/10 text-xs font-medium text-[#B49A7A]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B49A7A] animate-pulse" />
-            <span>{siteConfig.availabilityStatus[language]}</span>
-          </div>
+          {Boolean(siteConfig.availabilityStatus?.[language]?.trim()) && (
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F5F2]/10 text-xs font-medium text-[#B49A7A]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B49A7A] animate-pulse" />
+              <span>{siteConfig.availabilityStatus[language]}</span>
+            </div>
+          )}
 
           {/* Large Headline */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-[#F7F5F2] leading-[1.12]">

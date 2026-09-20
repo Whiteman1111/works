@@ -29,21 +29,28 @@ export const Hero: React.FC<HeroProps> = ({ language, onExploreClick, onAboutCli
       className="relative min-h-[86vh] md:min-h-[92vh] flex flex-col justify-between pt-28 md:pt-36 pb-12 w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-12"
     >
       {/* Top Tagline & Status Indicator */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#171717]/6">
-        <div className="flex items-center gap-2.5">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B49A7A] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#B49A7A]"></span>
-          </span>
-          <span className="text-[12px] font-medium tracking-wide text-[#77736F] uppercase">
-            {siteConfig.availabilityStatus[language]}
-          </span>
-        </div>
+      {(Boolean(siteConfig.availabilityStatus?.[language]?.trim()) ||
+        Boolean(siteConfig.location?.[language]?.trim())) && (
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#171717]/6">
+          {Boolean(siteConfig.availabilityStatus?.[language]?.trim()) && (
+            <div className="flex items-center gap-2.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B49A7A] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#B49A7A]"></span>
+              </span>
+              <span className="text-[12px] font-medium tracking-wide text-[#77736F] uppercase">
+                {siteConfig.availabilityStatus[language]}
+              </span>
+            </div>
+          )}
 
-        <div className="hidden sm:flex items-center gap-2 text-[12px] text-[#77736F] tracking-wide">
-          <span>{siteConfig.location[language]}</span>
+          {Boolean(siteConfig.location?.[language]?.trim()) && (
+            <div className="hidden sm:flex items-center gap-2 text-[12px] text-[#77736F] tracking-wide ms-auto">
+              <span>{siteConfig.location[language]}</span>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
       {/* Main Editorial Hero Layout */}
       <div className="my-auto py-10 md:py-16 flex flex-col items-start space-y-6 md:space-y-8 max-w-4xl">

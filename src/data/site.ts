@@ -37,12 +37,12 @@ export const siteConfig: SiteConfig = {
   },
   email: 'hello@nourantariq.design',
   location: {
-    ar: 'دبي / الرياض / العمل عن بُعد عالمياً',
-    en: 'Dubai / Riyadh / Available Worldwide',
+    ar: '',
+    en: '',
   },
   availabilityStatus: {
-    ar: 'متاحة للمشاريع المختارة لعام 2026',
-    en: 'Available for select commissions 2026',
+    ar: '',
+    en: '',
   },
   portraitImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop',
   bio: {

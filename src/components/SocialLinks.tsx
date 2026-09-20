@@ -8,6 +8,10 @@ import {
   XIcon,
   TikTokIcon,
   YouTubeIcon,
+  GlobeIcon,
+  GitHubIcon,
+  WhatsAppIcon,
+  TelegramIcon,
 } from './SocialIcons';
 import { Language } from '../types';
 import { usePortfolio } from '../context/PortfolioContext';
@@ -27,7 +31,9 @@ interface PlatformItem {
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({ language, variant = 'hero' }) => {
   const { siteConfig } = usePortfolio();
-  const platforms: PlatformItem[] = [
+  const hiddenPlatforms = siteConfig.hiddenPlatforms || [];
+
+  const defaultPlatforms: PlatformItem[] = [
     {
       id: 'instagram',
       name: 'Instagram',
@@ -84,7 +90,40 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ language, variant = 'h
       url: siteConfig.socials.youtube,
       icon: YouTubeIcon,
     },
-  ].filter((p) => Boolean(p.url));
+  ];
+
+  // Map custom platforms if any
+  const getCustomIcon = (iconName?: string) => {
+    switch (iconName) {
+      case 'github':
+        return GitHubIcon;
+      case 'whatsapp':
+        return WhatsAppIcon;
+      case 'telegram':
+        return TelegramIcon;
+      case 'youtube':
+        return YouTubeIcon;
+      default:
+        return GlobeIcon;
+    }
+  };
+
+  const customPlatformsList: PlatformItem[] = (siteConfig.customPlatforms || [])
+    .filter((cp) => cp.enabled !== false && Boolean(cp.url?.trim()))
+    .map((cp) => ({
+      id: cp.id,
+      name: cp.name,
+      nameAr: cp.nameAr || cp.name,
+      url: cp.url,
+      icon: getCustomIcon(cp.icon),
+    }));
+
+  const platforms: PlatformItem[] = [
+    ...defaultPlatforms.filter(
+      (p) => Boolean(p.url?.trim()) && !hiddenPlatforms.includes(p.id)
+    ),
+    ...customPlatformsList.filter((p) => !hiddenPlatforms.includes(p.id)),
+  ];
 
   if (platforms.length === 0) return null;
 

@@ -118,6 +118,15 @@ export interface SiteConfig {
   establishedYear?: string;
   accentColor?: string;
   ownerPasscode?: string;
+  hiddenPlatforms?: string[];
+  customPlatforms?: {
+    id: string;
+    name: string;
+    nameAr: string;
+    url: string;
+    icon?: string;
+    enabled?: boolean;
+  }[];
   socials: {
     instagram: string;
     behance: string;
